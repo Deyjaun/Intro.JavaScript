@@ -2,12 +2,17 @@ let milliseconds = 0
 let seconds = 0
 let minutes = 0
 
+
 let digits = document.getElementById('digits')
+
+let startButton = document.getElementById('start-btn')
 
 let interval;
 
-function start() {
-    reset(interval)
+function start() { 
+
+    startButton.disabled = true
+    
     
     interval = setInterval (function() {
         milliseconds = milliseconds + 10
@@ -17,16 +22,18 @@ function start() {
         }
         if (seconds >= 60) {
             minutes = minutes + 1
+            seconds = 0
 
         }
 
-        digits.innerHTML = minutes + ':' + String(seconds).padStart(2, '0') + ':' + milliseconds
+        digits.innerHTML = minutes + ':' + String(seconds).padStart(2, '0') + ':' + milliseconds/10
 
 }, 10)
 }
 
 function stop () {
     clearInterval(interval)
+    startButton.disabled = false
 
 }
 
@@ -36,4 +43,13 @@ function reset() {
     seconds = 0
     minutes = 0
     digits.innerHTML = "00:00:00"
+}
+
+
+function lap()  {
+    const node = document.createElement("li");
+    const textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    document.getElementById("myList").appendChild(node);
+
 }
